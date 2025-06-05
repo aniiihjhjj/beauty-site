@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmação</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #d6f1ff, #ffffff);
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            padding: 50px;
+            color: #222;
+        }
+
+        .mensagem {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .borboleta {
+            width: 150px;
+            animation: voar 3s ease-in-out forwards;
+        }
+
+        @keyframes voar {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+            50% {
+                transform: translateY(-50px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-200px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mensagem">Obrigada pelo seu interesse! 💙</div>
+    <img class="borboleta" src="{{ url_for('static', filename='borboleta_azul.jpeg') }}" alt="Borboleta voando">
+</body>
+</html>

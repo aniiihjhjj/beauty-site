@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: beauty-site
+    env: python
+    buildCommand: ""
+    startCommand: python site_1.py
+    envVars:
+      - key: FLASK_ENV
+        value: development
+    autoDeploy: true

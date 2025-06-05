@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty in Box - Assinatura Skincare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(to bottom, #dceeff, #f0f8ff);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header img {
+            width: 100px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.5rem;
+            margin-top: 10px;
+        }
+
+        .intro {
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 1.2rem;
+        }
+
+        .caixas {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .caixa {
+            background-color: #fff;
+            border: 2px solid #b3d8ff;
+            border-radius: 20px;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .caixa:hover {
+            transform: scale(1.03);
+        }
+
+        .caixa img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .preco {
+            font-weight: bold;
+            color: #0066cc;
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #66b2ff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #3385ff;
+        }
+
+        .formulario {
+            max-width: 500px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid #b3d8ff;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .visao-missao {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            background-color: #000;
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .visao-missao div {
+            max-width: 300px;
+            margin: 10px;
+        }
+
+        footer {
+            background-color: #dceeff;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='logo.jpeg') }}" alt="Logo da Loja">
+        <h1>Beauty in Box 💙</h1>
+    </header>
+
+    <div class="intro">
+        <p>Assine uma experiência mensal de autocuidado com caixas exclusivas para sua pele 💧</p>
+    </div>
+
+    <section class="caixas">
+        <div class="caixa">
+            <img src="{{ url_for('static', filename='caixa.jpeg') }}" alt="Caixa Skincare Básica">
+            <h2>Caixa Básica</h2>
+            <ul>
+                <li>Sabonete Facial</li>
+                <li>Hidratante</li>
+                <li>Protetor Solar</li>
+            </ul>
+            <p class="preco">R$ 49,90/mês</p>
+            <button onclick="document.getElementById('formulario').scrollIntoView({ behavior: 'smooth' });">Assinar</button>
+        </div>
+        <div class="caixa">
+            <img src="{{ url_for('static', filename='caixa_media.jpeg') }}" alt="Caixa Skincare Média">
+            <h2>Caixa Média 🌼</h2>
+            <ul>
+                <li>Sabonete</li>
+                <li>Esfoliante</li>
+                <li>Sérum</li>
+                <li>Hidratante</li>
+                <li>Protetor Solar</li>
+            </ul>
+            <p class="preco">R$ 120,90/mês</p>
+            <button onclick="document.getElementById('formulario').scrollIntoView({ behavior: 'smooth' });">Assinar</button>
+        </div>
+    </section>
+
+    <section id="formulario" class="formulario">
+        <h2 style="text-align: center; margin-bottom: 20px;">Formulário de Assinatura</h2>
+        <form action="/enviar" method="POST">
+            <label for="nome">Nome completo</label>
+            <input type="text" name="nome" id="nome" required>
+
+            <label for="email">E-mail</label>
+            <input type="email" name="email" id="email" required>
+
+            <label for="pagamento">Forma de pagamento</label>
+            <select name="pagamento" id="pagamento" required>
+                <option value="">Selecione</option>
+                <option value="cartao">Cartão de Crédito</option>
+                <option value="boleto">Boleto</option>
+                <option value="pix">Pix</option>
+            </select>
+
+            <br><br>
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+
+    <section class="visao-missao">
+        <div>
+            <h3>🌸 Visão</h3>
+            <p>Levar autoestima e carinho através do cuidado com a pele.</p>
+        </div>
+        <div>
+            <h3>🌼 Missão</h3>
+            <p>Entregar caixas com produtos confiáveis e cheias de amor.</p>
+        </div>
+        <div>
+            <h3>🌿 Valores</h3>
+            <p>Cuidado, respeito, beleza acessível e autenticidade 💙</p>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 Beauty in Box - Criado com amor 💙
+    </footer>
+</body>
+</html>
