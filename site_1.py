@@ -1,24 +1,24 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template
+import os
 
 app = Flask(__name__)
 
-@app.route("/")
-def home():
-    return render_template("index.html")  # Aqui você precisa garantir que a página index.html esteja na pasta "templates"
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-@app.route("/enviar", methods=["POST"])
-def enviar():
-    nome = request.form["nome"]
-    email = request.form["email"]
-    pagamento = request.form["pagamento"]
+@app.route('/visao')
+def visao():
+    return render_template('visao.html')
 
-    # Aqui você pode salvar esses dados se quiser (em arquivo, banco etc.)
+@app.route('/valores')
+def valores():
+    return render_template('valores.html')
 
-    return redirect(url_for("confirmacao"))
+@app.route('/interesse')
+def interesse():
+    return render_template('interesse.html')
 
-@app.route("/confirmacao")
-def confirmacao():
-    return render_template("confirmacao.html")  # Certifique-se de que confirmacao.html esteja na pasta "templates"
-
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
